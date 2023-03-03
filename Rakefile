@@ -8,6 +8,10 @@ task :server do
     return
   end
 
+task :start do
+    exec "rerun -b 'rackup config.ru' "
+  end
+
   # rackup -p PORT will run on the port specified (9292 by default)
   ENV["PORT"] ||= "9292"
   rackup = "rackup -p #{ENV['PORT']}"
