@@ -36,14 +36,21 @@ class ApplicationController < Sinatra::Base
   end
 
   # @method: Add a new MEME to the DB
-  post '/meme/create' do
+  post '/memes/create' do
     begin
         meme = Meme.create( self.data(create: true) )
         json_response(code: 201, data: meme)
     rescue => e
         json_response(code: 422, data: { error: e.message })
     end
-end
+  end
+
+
+    # @method: Display all todos
+  get '/memes' do
+      meme = Meme.all
+      json_response(data: memes)
+  end
 
 
 
