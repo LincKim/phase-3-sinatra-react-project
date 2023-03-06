@@ -46,7 +46,7 @@ class ApplicationController < Sinatra::Base
   end
 
 
-    # @method: Display all todos
+    # @method: Display all memes
   get '/memes' do
       meme = Meme.all
       json_response(data: memes)
