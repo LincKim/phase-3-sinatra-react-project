@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_06_112714) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_06_164137) do
   create_table "memes", force: :cascade do |t|
-    t.binary "title", limit: 2097152
+    t.string "top_text"
+    t.string "bottom_text"
+    t.string "url"
+    t.datetime "createdAt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "password"
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

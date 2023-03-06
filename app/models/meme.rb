@@ -1,3 +1,6 @@
 class Meme < ActiveRecord::Base
-    enum :status, [ :CREATED, :ONGOING, :COMPLETED, :CANCELLED ]
+    belongs_to :user
+    validates_presence_of :url
+    validates :top_text, presence: true
+    validates :bottom_text, presence: true
 end

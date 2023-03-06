@@ -36,22 +36,56 @@ class ApplicationController < Sinatra::Base
   end
 
   # @method: Add a new MEME to the DB
+  
   post '/memes/create' do
-    begin
-        meme = Meme.create( self.data(create: true) )
-        json_response(code: 201, data: meme)
-    rescue => e
-        json_response(code: 422, data: { error: e.message })
+    # puts params.inspect
+    data = JSON.parse(request.body.read)
+      begin
+          memes = Meme.create(data)
+          json_response(code: 201, data: memes)
+          memes.to_json
+      rescue => e
+          json_response(code: 422, data: { error: e.message })
+        #   memes.to_json
+      end       
     end
-  end
 
 
     # @method: Display all memes
   get '/memes' do
       meme = Meme.all
-      json_response(data: memes)
+      meme.to_json
   end
 
+  put '/memes/update/:id' do
+    data = JSON.parse(request.body.read)
+      begin
+          memes = Meme.find(params[:id].to_i)
+          memes.update(data)
+          json_response(data: { message: "memes updated successfully" })
+          memes.to_json
+      rescue => e
+          json_response(code: 422 ,data: { error: e.message })
+      end
+  end
+
+  get '/memes/search' do
+    query = params[:query]
+    memes = Meme.select{ |meme| meme[:top_text].include?(query) || meme[:date].to_s.include?(query) }
+    memes.to_json
+  end
+
+  delete '/memes/:id' do
+    begin
+      meme = Meme.find(params[:id])
+      meme.destroy
+      json_response(data: { message: "Meme deleted successfully" })
+      meme.to_json
+    rescue => e
+      json_response(code: 422, data: { error: e.message })
+       
+    end
+  end
 
 
    # @helper: not found error formatter
