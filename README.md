@@ -50,11 +50,11 @@ This command sets up the necessary node modules for this repository.
 This is to enable the display of this app's UI.
 ## Running
 
-* [click here](#) to open the frontend part of the app.
+* [click here](https://dainty-truffle-d8cd14.netlify.app) to open the frontend part of the app.
 
 ## Database
 Database link:
-* [link](#)
+* [link](https://generator-36sj.onrender.com)
 
 ## Authors
 
